@@ -1,0 +1,11 @@
+# Dùng bộ rule mặc định của gitleaks, chỉ bỏ qua dấu vân tay khóa SSH công khai
+# mà sshd ghi vào log (evidence/11-bastion-sshd.log). Đây không phải secret.
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "SSH public key fingerprint in sshd log"
+condition = "AND"
+paths = ['''evidence/11-bastion-sshd\.log''']
+regexTarget = "line"
+regexes = ['''Accepted (key|publickey) .*SHA256:''']

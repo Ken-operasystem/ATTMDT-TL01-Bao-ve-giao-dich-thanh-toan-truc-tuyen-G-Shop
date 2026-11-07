@@ -1,0 +1,17 @@
+Buoc 1: Chung thu con duoi 30 ngay, bat dau gia han
+  Ban cu: serial=76B3D1EA87662CCC, het han=Nov 27 07:06:10 2026 GMT
+Buoc 2: Tao khoa ECDSA P-256 moi va CSR (khoa khong roi may chu)
+Buoc 3: Issuing CA kiem tra CSR va ky chung thu 90 ngay
+  CSR: Certificate request self-signature verify OK
+  web/www-new.crt: OK
+Buoc 4: Thay chung thu tren Web (giu ban cu de thu hoi)
+  Ban moi: serial=76B3D1EA87662CD0, het han=Feb  5 07:06:59 2027 GMT
+Buoc 5: Thu hoi ban cu (superseded) va phat hanh CRL moi
+  Ban cu: error 23 at 0 depth lookup: certificate revoked
+  Ban cu: error web/www-prev.crt: verification failed
+Xong: can reload Nginx de dung chung thu moi.
+2026/11/07 07:07:00 [notice] 9#9: signal process started
+Chung thu Nginx dang phuc vu sau khi reload:
+  serial=76B3D1EA87662CD0
+  notAfter=Feb  5 07:06:59 2027 GMT
+  Certificate will not expire

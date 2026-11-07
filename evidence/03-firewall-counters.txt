@@ -1,0 +1,46 @@
+table inet gshop {
+	counter dropped_forward {
+		packets 26 bytes 1560
+	}
+
+	counter dropped_input {
+		packets 4 bytes 240
+	}
+
+	chain prerouting {
+		type nat hook prerouting priority dstnat; policy accept;
+		ip daddr 10.66.10.2 tcp dport 443 counter packets 39 bytes 2340 dnat ip to 10.66.20.10:443
+	}
+
+	chain postrouting {
+		type nat hook postrouting priority srcnat; policy accept;
+		ip saddr { 10.66.20.0/24, 10.66.30.0/24, 10.66.40.0/24, 10.66.50.0/24, 10.66.60.0/24 } ip daddr 10.66.10.0/24 counter packets 17 bytes 1020 masquerade
+	}
+
+	chain forward {
+		type filter hook forward priority filter; policy drop;
+		ct state established,related accept
+		ct state invalid counter packets 0 bytes 0 drop
+		ip saddr 10.66.10.0/24 ip daddr 10.66.20.10 tcp dport 443 ct status dnat counter packets 39 bytes 2340 accept comment "R1 Internet->Web 443"
+		ip saddr 10.66.20.10 ip daddr 10.66.30.10 tcp dport 8000 counter packets 57 bytes 3420 accept comment "R2 Web->App 8000"
+		ip saddr 10.66.30.10 ip daddr 10.66.40.10 tcp dport 5432 counter packets 88 bytes 5280 accept comment "R3 App->DB 5432"
+		ip saddr 10.66.30.10 ip daddr 10.66.10.20 tcp dport 8443 counter packets 11 bytes 660 accept comment "R4a App->Gateway 8443"
+		ip saddr 10.66.30.10 ip daddr 10.66.10.30 tcp dport 9443 counter packets 6 bytes 360 accept comment "R4b App->Bank 9443"
+		ip saddr 10.66.60.0/24 ip daddr 10.66.50.10 tcp dport 22 counter packets 1 bytes 60 accept comment "R5 VPN->Bastion 22"
+		ip saddr 10.66.50.10 ip daddr { 10.66.20.10, 10.66.30.10, 10.66.40.10 } tcp dport 22 counter packets 0 bytes 0 accept comment "R6a Bastion->servers 22"
+		ip saddr 10.66.50.10 ip daddr 10.66.30.10 tcp dport 9000 counter packets 1 bytes 60 accept comment "R6b Bastion->App admin 9000"
+		counter name "dropped_forward" drop comment "R8 Default deny"
+	}
+
+	chain input {
+		type filter hook input priority filter; policy drop;
+		iif "lo" accept
+		ct state established,related accept
+		ip saddr 10.66.10.0/24 udp dport 51820 counter packets 0 bytes 0 accept comment "R7 Internet->VPN 51820"
+		counter name "dropped_input" drop comment "R8 Default deny"
+	}
+
+	chain output {
+		type filter hook output priority filter; policy accept;
+	}
+}

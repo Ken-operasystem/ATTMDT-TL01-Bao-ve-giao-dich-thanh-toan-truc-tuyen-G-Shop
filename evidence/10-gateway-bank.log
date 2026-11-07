@@ -1,0 +1,49 @@
+bank-1     | bank: nghe 9443, mTLS bắt buộc, kiểm tra CRL
+bank-1     | bank: 10.66.10.20 pay-gateway POST /v1/transactions 201
+bank-1     | bank: 10.66.10.2 gshop-app GET /v1/transactions/BK8260597750 200
+bank-1     | bank: 10.66.10.20 pay-gateway POST /v1/transactions 201
+bank-1     | bank: 10.66.10.2 gshop-app GET /v1/transactions/BK5273643500 200
+bank-1     | bank: 10.66.10.20 pay-gateway POST /v1/transactions 201
+bank-1     | bank: 10.66.10.2 gshop-app GET /v1/transactions/BK2293309822 200
+bank-1     | bank: 10.66.10.20 pay-gateway POST /v1/transactions 201
+bank-1     | bank: 10.66.10.20 pay-gateway POST /v1/transactions 201
+bank-1     | bank: 10.66.10.2 gshop-app GET /v1/transactions/BK7351095066 200
+bank-1     | bank: 10.66.10.20 pay-gateway POST /v1/transactions 201
+bank-1     | bank: 10.66.10.20 pay-gateway POST /v1/transactions 201
+bank-1     | bank: 10.66.10.2 gshop-app GET /v1/transactions/BK5993163359 200
+bank-1     | bank: 10.66.10.20 pay-gateway POST /v1/transactions 201
+bank-1     | bank: 10.66.10.20 pay-gateway POST /v1/transactions 201
+bank-1     | bank: 10.66.10.66 TLS_REJECT PEER_DID_NOT_RETURN_A_CERTIFICATE
+bank-1     | bank: 10.66.10.66 TLS_REJECT CERTIFICATE_VERIFY_FAILED
+bank-1     | bank: 10.66.10.66 gshop-app GET /v1/transactions/BK0000000000 404
+bank-1     | bank: 10.66.10.66 gshop-app POST /v1/transactions 403
+bank-1     | bank: 10.66.10.2 TLS_REJECT UNEXPECTED_EOF_WHILE_READING
+gateway-1  | gateway: nghe 8443, debug=True
+gateway-1  | gateway: 10.66.10.2 - POST /v1/payments 201
+gateway-1  | gateway: 10.66.10.66 - POST /pay/GW53F781B56C49F46D 200
+gateway-1  | gateway: 10.66.10.2 - POST /v1/payments 201
+gateway-1  | gateway: 10.66.10.66 - POST /pay/GWD123E120809933CC 200
+gateway-1  | gateway: 10.66.10.2 - POST /v1/payments 201
+gateway-1  | gateway: 10.66.10.66 - POST /pay/GW4026D7164A8A7561 200
+gateway-1  | gateway: 10.66.10.66 - GET /v1/debug/deliveries/GW4026D7164A8A7561 200
+gateway-1  | gateway: 10.66.10.2 - POST /v1/payments 201
+gateway-1  | gateway: 10.66.10.66 - POST /pay/GW9325F7E902D06F0D 200
+gateway-1  | gateway: 10.66.10.66 - GET /v1/debug/deliveries/GW9325F7E902D06F0D 200
+gateway-1  | gateway: 10.66.10.2 - POST /v1/payments 201
+gateway-1  | gateway: 10.66.10.66 - POST /pay/GW5EE2279011DA4C95 200
+gateway-1  | gateway: 10.66.10.66 - GET /v1/debug/deliveries/GW5EE2279011DA4C95 200
+gateway-1  | gateway: 10.66.10.2 - POST /v1/payments 201
+gateway-1  | gateway: 10.66.10.66 - POST /pay/GWE4444C4E9EAE5E85 200
+gateway-1  | gateway: 10.66.10.66 - GET /v1/debug/deliveries/GWE4444C4E9EAE5E85 200
+gateway-1  | gateway: 10.66.10.2 - POST /v1/payments 201
+gateway-1  | gateway: 10.66.10.66 - POST /pay/GW3B430BED08D3A38C 200
+gateway-1  | gateway: 10.66.10.66 - GET /v1/debug/deliveries/GW3B430BED08D3A38C 200
+gateway-1  | gateway: 10.66.10.2 - POST /v1/payments 201
+gateway-1  | gateway: 10.66.10.2 - POST /v1/payments 201
+gateway-1  | gateway: 10.66.10.66 - POST /pay/GWAEB895ABDC6C22A3 200
+gateway-1  | gateway: 10.66.10.66 - GET /v1/debug/deliveries/GWAEB895ABDC6C22A3 200
+gateway-1  | gateway: 10.66.10.66 - POST /pay/GW36D04D80A9A47572 200
+gateway-1  | gateway: 10.66.10.66 - GET /v1/debug/deliveries/GW36D04D80A9A47572 200
+gateway-1  | gateway: 10.66.10.2 - POST /v1/payments 201
+gateway-1  | gateway: 10.66.10.66 TLS_REJECT SSLV3_ALERT_BAD_CERTIFICATE
+gateway-1  | gateway: 10.66.10.2 TLS_REJECT UNEXPECTED_EOF_WHILE_READING

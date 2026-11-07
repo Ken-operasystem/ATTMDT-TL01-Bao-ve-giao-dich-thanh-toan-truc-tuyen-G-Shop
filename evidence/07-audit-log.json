@@ -1,0 +1,373 @@
+[
+    {
+        "id": 34,
+        "at": "2026-11-07T07:07:02.127952+00:00",
+        "actor": "admin",
+        "action": "admin_access",
+        "detail": {
+            "ip": "10.66.50.10",
+            "path": "/admin/audit"
+        }
+    },
+    {
+        "id": 33,
+        "at": "2026-11-07T07:07:01.718077+00:00",
+        "actor": "admin",
+        "action": "admin_access",
+        "detail": {
+            "ip": "10.66.50.10",
+            "path": "/admin/orders"
+        }
+    },
+    {
+        "id": 32,
+        "at": "2026-11-07T07:06:22.444269+00:00",
+        "actor": "customer",
+        "action": "order_created",
+        "detail": {
+            "ip": "10.66.10.66",
+            "order_id": "a2a3d79d-eee8-40ba-ac75-bf734864fa8b",
+            "amount_vnd": 1250000
+        }
+    },
+    {
+        "id": 31,
+        "at": "2026-11-07T07:06:22.376010+00:00",
+        "actor": "gateway",
+        "action": "webhook_rejected",
+        "detail": {
+            "ip": "10.66.10.66",
+            "reason": "amount_mismatch",
+            "event_id": "evt_1554d9e6a69bba71695a4bee",
+            "order_id": "551ba5d9-2c57-42dc-8e95-feb8d5ebc009"
+        }
+    },
+    {
+        "id": 30,
+        "at": "2026-11-07T07:06:22.328127+00:00",
+        "actor": "gateway",
+        "action": "webhook_rejected",
+        "detail": {
+            "ip": "10.66.10.66",
+            "reason": "txn_mismatch",
+            "event_id": "evt_292a2b16957a6d4df5c77827",
+            "order_id": "551ba5d9-2c57-42dc-8e95-feb8d5ebc009"
+        }
+    },
+    {
+        "id": 29,
+        "at": "2026-11-07T07:06:22.253149+00:00",
+        "actor": "customer",
+        "action": "order_created",
+        "detail": {
+            "ip": "10.66.10.66",
+            "order_id": "a7a157d7-620e-41b7-a404-f6553c96ec6c",
+            "amount_vnd": 350000
+        }
+    },
+    {
+        "id": 28,
+        "at": "2026-11-07T07:06:22.205541+00:00",
+        "actor": "customer",
+        "action": "order_created",
+        "detail": {
+            "ip": "10.66.10.66",
+            "order_id": "551ba5d9-2c57-42dc-8e95-feb8d5ebc009",
+            "amount_vnd": 1250000
+        }
+    },
+    {
+        "id": 27,
+        "at": "2026-11-07T07:06:22.117582+00:00",
+        "actor": "gateway",
+        "action": "webhook_duplicate",
+        "detail": {
+            "ip": "10.66.10.66",
+            "event_id": "evt_52483fd643504484ab9181c1"
+        }
+    },
+    {
+        "id": 26,
+        "at": "2026-11-07T07:06:22.110395+00:00",
+        "actor": "gateway",
+        "action": "webhook_duplicate",
+        "detail": {
+            "ip": "10.66.10.66",
+            "event_id": "evt_52483fd643504484ab9181c1"
+        }
+    },
+    {
+        "id": 25,
+        "at": "2026-11-07T07:06:22.103941+00:00",
+        "actor": "gateway",
+        "action": "webhook_duplicate",
+        "detail": {
+            "ip": "10.66.10.66",
+            "event_id": "evt_52483fd643504484ab9181c1"
+        }
+    },
+    {
+        "id": 24,
+        "at": "2026-11-07T07:06:22.074913+00:00",
+        "actor": "gateway",
+        "action": "webhook_duplicate",
+        "detail": {
+            "ip": "10.66.10.66",
+            "event_id": "evt_52483fd643504484ab9181c1"
+        }
+    },
+    {
+        "id": 23,
+        "at": "2026-11-07T07:06:22.097798+00:00",
+        "actor": "gateway",
+        "action": "webhook_duplicate",
+        "detail": {
+            "ip": "10.66.10.66",
+            "event_id": "evt_52483fd643504484ab9181c1"
+        }
+    },
+    {
+        "id": 22,
+        "at": "2026-11-07T07:06:22.104192+00:00",
+        "actor": "gateway",
+        "action": "webhook_duplicate",
+        "detail": {
+            "ip": "10.66.10.66",
+            "event_id": "evt_52483fd643504484ab9181c1"
+        }
+    },
+    {
+        "id": 21,
+        "at": "2026-11-07T07:06:22.101047+00:00",
+        "actor": "gateway",
+        "action": "webhook_duplicate",
+        "detail": {
+            "ip": "10.66.10.66",
+            "event_id": "evt_52483fd643504484ab9181c1"
+        }
+    },
+    {
+        "id": 20,
+        "at": "2026-11-07T07:06:22.061972+00:00",
+        "actor": "gateway",
+        "action": "webhook_duplicate",
+        "detail": {
+            "ip": "10.66.10.66",
+            "event_id": "evt_52483fd643504484ab9181c1"
+        }
+    },
+    {
+        "id": 19,
+        "at": "2026-11-07T07:06:22.074805+00:00",
+        "actor": "gateway",
+        "action": "webhook_duplicate",
+        "detail": {
+            "ip": "10.66.10.66",
+            "event_id": "evt_52483fd643504484ab9181c1"
+        }
+    },
+    {
+        "id": 18,
+        "at": "2026-11-07T07:06:22.062476+00:00",
+        "actor": "gateway",
+        "action": "order_paid",
+        "detail": {
+            "ip": "10.66.10.66",
+            "bank_ref": "BK5993163359",
+            "event_id": "evt_52483fd643504484ab9181c1",
+            "order_id": "9ad3eb9d-1c19-4cf4-abd7-67280afda566",
+            "amount_vnd": 1250000
+        }
+    },
+    {
+        "id": 17,
+        "at": "2026-11-07T07:06:21.969950+00:00",
+        "actor": "customer",
+        "action": "order_created",
+        "detail": {
+            "ip": "10.66.10.66",
+            "order_id": "9ad3eb9d-1c19-4cf4-abd7-67280afda566",
+            "amount_vnd": 1250000
+        }
+    },
+    {
+        "id": 16,
+        "at": "2026-11-07T07:06:21.889888+00:00",
+        "actor": "gateway",
+        "action": "webhook_rejected",
+        "detail": {
+            "ip": "10.66.10.66",
+            "reason": "timestamp_out_of_window"
+        }
+    },
+    {
+        "id": 15,
+        "at": "2026-11-07T07:06:21.823198+00:00",
+        "actor": "customer",
+        "action": "order_created",
+        "detail": {
+            "ip": "10.66.10.66",
+            "order_id": "c104e77f-44a8-40da-bc62-291f52fad15f",
+            "amount_vnd": 1250000
+        }
+    },
+    {
+        "id": 14,
+        "at": "2026-11-07T07:06:21.752532+00:00",
+        "actor": "gateway",
+        "action": "webhook_duplicate",
+        "detail": {
+            "ip": "10.66.10.66",
+            "event_id": "evt_6546535e78071fc90eaf04f0"
+        }
+    },
+    {
+        "id": 13,
+        "at": "2026-11-07T07:06:21.694943+00:00",
+        "actor": "gateway",
+        "action": "order_paid",
+        "detail": {
+            "ip": "10.66.10.20",
+            "bank_ref": "BK7351095066",
+            "event_id": "evt_6546535e78071fc90eaf04f0",
+            "order_id": "bdc53068-cbff-4a99-a9e8-2bb343090167",
+            "amount_vnd": 1250000
+        }
+    },
+    {
+        "id": 12,
+        "at": "2026-11-07T07:06:21.644609+00:00",
+        "actor": "customer",
+        "action": "order_created",
+        "detail": {
+            "ip": "10.66.10.66",
+            "order_id": "bdc53068-cbff-4a99-a9e8-2bb343090167",
+            "amount_vnd": 1250000
+        }
+    },
+    {
+        "id": 11,
+        "at": "2026-11-07T07:06:21.570446+00:00",
+        "actor": "gateway",
+        "action": "webhook_rejected",
+        "detail": {
+            "ip": "10.66.10.66",
+            "reason": "signature_invalid"
+        }
+    },
+    {
+        "id": 10,
+        "at": "2026-11-07T07:06:21.549580+00:00",
+        "actor": "gateway",
+        "action": "webhook_rejected",
+        "detail": {
+            "ip": "10.66.10.66",
+            "reason": "signature_invalid"
+        }
+    },
+    {
+        "id": 9,
+        "at": "2026-11-07T07:06:21.493729+00:00",
+        "actor": "customer",
+        "action": "order_created",
+        "detail": {
+            "ip": "10.66.10.66",
+            "order_id": "4b32297e-cb35-4a8b-9d43-ddeda30ccfa1",
+            "amount_vnd": 1250000
+        }
+    },
+    {
+        "id": 8,
+        "at": "2026-11-07T07:06:21.438222+00:00",
+        "actor": "gateway",
+        "action": "order_paid",
+        "detail": {
+            "ip": "10.66.10.66",
+            "bank_ref": "BK2293309822",
+            "event_id": "evt_0bc87eec725f68ff6755cd82",
+            "order_id": "2664efcf-4fdf-4b32-a958-d8ac481475a4",
+            "amount_vnd": 1250000
+        }
+    },
+    {
+        "id": 7,
+        "at": "2026-11-07T07:06:21.395341+00:00",
+        "actor": "gateway",
+        "action": "webhook_rejected",
+        "detail": {
+            "ip": "10.66.10.66",
+            "reason": "signature_invalid"
+        }
+    },
+    {
+        "id": 6,
+        "at": "2026-11-07T07:06:21.336179+00:00",
+        "actor": "customer",
+        "action": "order_created",
+        "detail": {
+            "ip": "10.66.10.66",
+            "order_id": "2664efcf-4fdf-4b32-a958-d8ac481475a4",
+            "amount_vnd": 1250000
+        }
+    },
+    {
+        "id": 5,
+        "at": "2026-11-07T07:06:21.253312+00:00",
+        "actor": "gateway",
+        "action": "order_paid",
+        "detail": {
+            "ip": "10.66.10.20",
+            "bank_ref": "BK5273643500",
+            "event_id": "evt_6146f6d1ce25a7decc5652f6",
+            "order_id": "650c09dc-f7ea-469f-9ddd-1aa523d42324",
+            "amount_vnd": 700000
+        }
+    },
+    {
+        "id": 4,
+        "at": "2026-11-07T07:06:21.199479+00:00",
+        "actor": "customer",
+        "action": "order_created",
+        "detail": {
+            "ip": "10.66.10.66",
+            "order_id": "650c09dc-f7ea-469f-9ddd-1aa523d42324",
+            "amount_vnd": 700000
+        }
+    },
+    {
+        "id": 3,
+        "at": "2026-11-07T07:06:21.199479+00:00",
+        "actor": "customer",
+        "action": "client_amount_ignored",
+        "detail": {
+            "ip": "10.66.10.66",
+            "order_id": "650c09dc-f7ea-469f-9ddd-1aa523d42324",
+            "client_amount": 1000,
+            "server_amount": 700000
+        }
+    },
+    {
+        "id": 2,
+        "at": "2026-11-07T07:06:21.115319+00:00",
+        "actor": "gateway",
+        "action": "order_paid",
+        "detail": {
+            "ip": "10.66.10.20",
+            "bank_ref": "BK8260597750",
+            "event_id": "evt_28f8c18993128371a362e4a2",
+            "order_id": "33a8784a-1fc0-4850-8b3a-92738e822b26",
+            "amount_vnd": 1250000
+        }
+    },
+    {
+        "id": 1,
+        "at": "2026-11-07T07:06:21.043448+00:00",
+        "actor": "customer",
+        "action": "order_created",
+        "detail": {
+            "ip": "10.66.10.66",
+            "order_id": "33a8784a-1fc0-4850-8b3a-92738e822b26",
+            "amount_vnd": 1250000
+        }
+    }
+]

@@ -1,0 +1,85 @@
+#!/usr/sbin/nft -f
+# Chính sách tường lửa G-Shop: mặc định chặn (Default Deny), chỉ mở đúng
+# luồng cần thiết (Least Privilege). Mỗi rule có counter để làm bằng chứng.
+# Chỉ thay bảng của G-Shop, không đụng rule DNS nội bộ của Docker
+table inet gshop
+delete table inet gshop
+
+define PUBLIC_IP = 10.66.10.2      # IP công khai của G-Shop (mặt Internet của firewall)
+define INTERNET  = 10.66.10.0/24
+define DMZ       = 10.66.20.0/24
+define APP_NET   = 10.66.30.0/24
+define DATA_NET  = 10.66.40.0/24
+define MGMT_NET  = 10.66.50.0/24
+define VPN_NET   = 10.66.60.0/24
+define INTERNAL  = { 10.66.20.0/24, 10.66.30.0/24, 10.66.40.0/24, 10.66.50.0/24, 10.66.60.0/24 }
+
+define WEB       = 10.66.20.10
+define APP       = 10.66.30.10
+define DB        = 10.66.40.10
+define BASTION   = 10.66.50.10
+define GATEWAY   = 10.66.10.20     # cổng thanh toán (bên ngoài)
+define BANK      = 10.66.10.30     # API ngân hàng (bên ngoài)
+
+table inet gshop {
+    counter dropped_forward {
+    }
+    counter dropped_input {
+    }
+
+    chain prerouting {
+        type nat hook prerouting priority dstnat; policy accept;
+        # Chỉ công bố HTTPS: IP công khai :443 -> Web trong DMZ
+        ip daddr $PUBLIC_IP tcp dport 443 counter dnat ip to $WEB:443
+    }
+
+    chain postrouting {
+        type nat hook postrouting priority srcnat; policy accept;
+        # Lưu lượng từ vùng nội bộ ra Internet đi bằng IP công khai
+        ip saddr $INTERNAL ip daddr $INTERNET counter masquerade
+    }
+
+    chain forward {
+        type filter hook forward priority filter; policy drop;
+
+        ct state established,related accept
+        ct state invalid counter drop
+
+        # R1: Internet -> Web (DMZ) HTTPS 443, chỉ khi đi qua DNAT
+        ip saddr $INTERNET ip daddr $WEB tcp dport 443 ct status dnat counter accept comment "R1 Internet->Web 443"
+
+        # R2: Web -> App API 8000
+        ip saddr $WEB ip daddr $APP tcp dport 8000 counter accept comment "R2 Web->App 8000"
+
+        # R3: App -> DB PostgreSQL 5432 (Web không có rule tới DB)
+        ip saddr $APP ip daddr $DB tcp dport 5432 counter accept comment "R3 App->DB 5432"
+
+        # R4: App -> cổng thanh toán 8443 và API ngân hàng 9443 (mTLS)
+        ip saddr $APP ip daddr $GATEWAY tcp dport 8443 counter accept comment "R4a App->Gateway 8443"
+        ip saddr $APP ip daddr $BANK tcp dport 9443 counter accept comment "R4b App->Bank 9443"
+
+        # R5: Quản trị viên (đã vào VPN) -> Bastion SSH 22
+        ip saddr $VPN_NET ip daddr $BASTION tcp dport 22 counter accept comment "R5 VPN->Bastion 22"
+
+        # R6: Bastion -> SSH 22 các server và API quản trị 9000 của App
+        ip saddr $BASTION ip daddr { $WEB, $APP, $DB } tcp dport 22 counter accept comment "R6a Bastion->servers 22"
+        ip saddr $BASTION ip daddr $APP tcp dport 9000 counter accept comment "R6b Bastion->App admin 9000"
+
+        # R8: Mọi luồng còn lại bị chặn và đếm lại
+        counter name dropped_forward drop comment "R8 Default deny"
+    }
+
+    chain input {
+        type filter hook input priority filter; policy drop;
+        iif lo accept
+        ct state established,related accept
+        # R7: Internet -> VPN gateway (WireGuard UDP 51820) trên firewall
+        ip saddr $INTERNET udp dport 51820 counter accept comment "R7 Internet->VPN 51820"
+        # Không mở SSH quản trị firewall ra Internet
+        counter name dropped_input drop comment "R8 Default deny"
+    }
+
+    chain output {
+        type filter hook output priority filter; policy accept;
+    }
+}

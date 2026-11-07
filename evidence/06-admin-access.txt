@@ -1,0 +1,8 @@
+## Dang nhap bang mat khau (phai bi tu choi)
+ops@10.66.50.10: Permission denied (publickey).
+## Dang nhap root (phai bi tu choi)
+root@10.66.50.10: Permission denied (publickey).
+## Dang nhap ops bang khoa, goi API quan tri tu Bastion
+admin API HTTP 200
+## Goi API quan tri tu Bastion khong co token
+admin API HTTP 401

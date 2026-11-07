@@ -1,0 +1,204 @@
+# Mô phỏng hạ tầng G-Shop: 6 vùng mạng, mọi lưu lượng giữa các vùng đi qua
+# firewall nftables. Các bridge tắt NAT nên container không ra Internet thật;
+# Docker chặn lưu lượng giữa hai bridge khác nhau, đường duy nhất là firewall.
+name: gshop-lab
+
+x-gshop: &gshop
+  image: tl01-gshop:latest
+  pull_policy: never
+
+services:
+  firewall:
+    <<: *gshop
+    build: .
+    pull_policy: build
+    command: ["sh", "/srv/firewall/start.sh"]
+    cap_add: [NET_ADMIN]
+    sysctls:
+      net.ipv4.ip_forward: "1"
+    healthcheck:
+      test: ["CMD", "nft", "list", "table", "inet", "gshop"]
+      interval: 2s
+      retries: 15
+    networks:
+      internet: {ipv4_address: 10.66.10.2}
+      dmz: {ipv4_address: 10.66.20.2}
+      app: {ipv4_address: 10.66.30.2}
+      data: {ipv4_address: 10.66.40.2}
+      mgmt: {ipv4_address: 10.66.50.2}
+      vpn: {ipv4_address: 10.66.60.2}
+
+  web:
+    image: nginx:1.30.6-alpine
+    command: ["sh", "/start.sh"]
+    cap_add: [NET_ADMIN]
+    volumes:
+      - ./web/nginx.conf:/etc/nginx/gshop.conf:ro
+      - ./web/start.sh:/start.sh:ro
+      - ./pki/out/web:/pki/web:ro
+    depends_on:
+      firewall: {condition: service_healthy}
+      app: {condition: service_started}
+    networks:
+      dmz: {ipv4_address: 10.66.20.10}
+
+  app:
+    <<: *gshop
+    command: ["sh", "/srv/scripts/run-as.sh", "10.66.30.2", "svc", "python", "-m", "gshop.server"]
+    cap_add: [NET_ADMIN]
+    extra_hosts:
+      - "pay.gateway.test:10.66.10.20"
+      - "api.bank.test:10.66.10.30"
+    secrets: [db_app_password, data_key, webhook_secret, gateway_api_key, admin_token]
+    volumes:
+      - ./pki/out/gshop-client:/pki/client:ro
+      - ./pki/out/trust:/pki/trust:ro
+    depends_on:
+      firewall: {condition: service_healthy}
+      db: {condition: service_healthy}
+    networks:
+      app: {ipv4_address: 10.66.30.10}
+
+  db:
+    image: postgres:16-alpine
+    command: ["sh", "/start.sh"]
+    cap_add: [NET_ADMIN]
+    environment:
+      POSTGRES_DB: gshop
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_owner_password
+    secrets: [db_owner_password, db_app_password]
+    volumes:
+      - ./db/start.sh:/start.sh:ro
+      - ./db/pg_hba.conf:/etc/postgresql/pg_hba.conf:ro
+      - ./db/init:/docker-entrypoint-initdb.d:ro
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "su-exec", "postgres", "pg_isready", "-d", "gshop", "-q"]
+      interval: 2s
+      retries: 30
+    depends_on:
+      firewall: {condition: service_healthy}
+    networks:
+      data: {ipv4_address: 10.66.40.10}
+
+  gateway:
+    <<: *gshop
+    command: ["sh", "/srv/scripts/run-as.sh", "-", "svc", "python", "/srv/gateway/gateway.py"]
+    environment:
+      GATEWAY_DEBUG: "1"
+      TESTER_IP: 10.66.10.66
+    extra_hosts:
+      - "www.gshop.test:10.66.10.2"
+      - "api.bank.test:10.66.10.30"
+    secrets: [gateway_api_key, webhook_secret]
+    volumes:
+      - ./pki/out/gateway-tls:/pki/gateway-tls:ro
+      - ./pki/out/gateway-client:/pki/gw-client:ro
+      - ./pki/out/trust:/pki/trust:ro
+    networks:
+      internet: {ipv4_address: 10.66.10.20}
+
+  bank:
+    <<: *gshop
+    command: ["sh", "/srv/scripts/run-as.sh", "-", "svc", "python", "/srv/bank/bank.py"]
+    volumes:
+      - ./pki/out/bank:/pki/bank:ro
+      - ./pki/out/trust:/pki/trust:ro
+    networks:
+      internet: {ipv4_address: 10.66.10.30}
+
+  bastion:
+    <<: *gshop
+    command: ["sh", "/srv/bastion/start.sh"]
+    cap_add: [NET_ADMIN]
+    secrets: [admin_token]
+    volumes:
+      - ./pki/out/ssh/bastion:/pki/ssh:ro
+    depends_on:
+      firewall: {condition: service_healthy}
+    networks:
+      mgmt: {ipv4_address: 10.66.50.10}
+
+  admin:
+    <<: *gshop
+    command: ["sh", "/srv/bastion/admin-start.sh"]
+    cap_add: [NET_ADMIN]
+    volumes:
+      - ./pki/out/ssh/admin:/pki/ssh:ro
+    depends_on:
+      firewall: {condition: service_healthy}
+    networks:
+      vpn: {ipv4_address: 10.66.60.10}
+
+  # Máy kiểm thử ngoài Internet (đóng vai khách hàng và kẻ tấn công)
+  tester:
+    <<: *gshop
+    profiles: [test]
+    command: ["sh", "/srv/scripts/run-as.sh", "10.66.10.2", "root", "sleep", "infinity"]
+    cap_add: [NET_ADMIN]
+    extra_hosts:
+      - "www.gshop.test:10.66.10.2"
+      - "gshop.test:10.66.10.2"
+      - "evil.gshop.test:10.66.10.2"
+      - "pay.gateway.test:10.66.10.20"
+      - "api.bank.test:10.66.10.30"
+    volumes:
+      - ./pki/out/trust:/pki/trust:ro
+      - ./pki/out/gshop-client:/pki/client:ro
+      - ./tests:/srv/tests:ro
+      - ./evidence:/srv/evidence
+    depends_on:
+      firewall: {condition: service_healthy}
+    networks:
+      internet: {ipv4_address: 10.66.10.66}
+
+  # Công cụ PKI: sinh, gia hạn và thu hồi chứng thư (không có mạng)
+  pki:
+    <<: *gshop
+    profiles: [tools]
+    network_mode: none
+    working_dir: /work
+    environment:
+      HOST_UID: ${HOST_UID:-1000}
+      HOST_GID: ${HOST_GID:-1000}
+    volumes:
+      - ./:/work
+    command: ["sh", "pki/make-pki.sh", "/work/pki/out"]
+
+volumes:
+  pgdata:
+
+secrets:
+  db_owner_password: {file: ./pki/out/secrets/db_owner_password}
+  db_app_password: {file: ./pki/out/secrets/db_app_password}
+  data_key: {file: ./pki/out/secrets/data_key}
+  webhook_secret: {file: ./pki/out/secrets/webhook_secret}
+  gateway_api_key: {file: ./pki/out/secrets/gateway_api_key}
+  admin_token: {file: ./pki/out/secrets/admin_token}
+
+x-no-nat: &no_nat
+  com.docker.network.bridge.enable_ip_masquerade: "false"
+  # Tắt rule chặn truy cập thẳng IP container của Docker để gói tin định
+  # tuyến qua container firewall đi được; lọc thật do nftables đảm nhận.
+  com.docker.network.bridge.gateway_mode_ipv4: nat-unprotected
+
+networks:
+  internet:
+    driver_opts: *no_nat
+    ipam: {config: [{subnet: 10.66.10.0/24, gateway: 10.66.10.1}]}
+  dmz:
+    driver_opts: *no_nat
+    ipam: {config: [{subnet: 10.66.20.0/24, gateway: 10.66.20.1}]}
+  app:
+    driver_opts: *no_nat
+    ipam: {config: [{subnet: 10.66.30.0/24, gateway: 10.66.30.1}]}
+  data:
+    driver_opts: *no_nat
+    ipam: {config: [{subnet: 10.66.40.0/24, gateway: 10.66.40.1}]}
+  mgmt:
+    driver_opts: *no_nat
+    ipam: {config: [{subnet: 10.66.50.0/24, gateway: 10.66.50.1}]}
+  vpn:
+    driver_opts: *no_nat
+    ipam: {config: [{subnet: 10.66.60.0/24, gateway: 10.66.60.1}]}

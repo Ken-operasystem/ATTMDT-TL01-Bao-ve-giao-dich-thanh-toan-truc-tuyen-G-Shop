@@ -1,0 +1,27 @@
+PASS P1 Chain day du Root -> Issuing -> www.gshop.test
+      web/www.crt: OK
+PASS P2 Thieu Intermediate CA
+      error 20 at 0 depth lookup: unable to get local issuer certificate
+      error web/www.crt: verification failed
+PASS P3 Hostname dung www.gshop.test
+      web/www.crt: OK
+PASS P4 Hostname sai shop.attacker.test
+      error 62 at 0 depth lookup: hostname mismatch
+      error web/www.crt: verification failed
+PASS P5 Kiem tra tai thoi diem 30 ngay sau (het han)
+      error 10 at 0 depth lookup: certificate has expired
+      error web/www.crt: verification failed
+PASS P6 CRL: chung thu dang dung chua bi thu hoi
+      web/www.crt: OK
+PASS P7 CRL: chung thu cu da thu hoi (keyCompromise)
+      error 23 at 0 depth lookup: certificate revoked
+      error web/www-old.crt: verification failed
+PASS P8 OCSP: www.crt -> good
+      	This Update: Nov  7 07:06:59 2026 GMT
+      	Next Update: Nov  7 07:11:59 2026 GMT
+PASS P9 OCSP: www-old.crt -> revoked
+      	Reason: keyCompromise
+      	Revocation Time: Nov  7 07:06:10 2026 GMT
+PASS P10 Canh bao sap het han (con duoi 30 ngay)
+      Certificate will expire
+Tong: 10 PASS, 0 FAIL

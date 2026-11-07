@@ -1,0 +1,6 @@
+# Khóa, chứng thư và secret sinh ra khi chạy pki/make-pki.sh
+pki/out/
+.env
+__pycache__/
+.pytest_cache/
+*.pyc

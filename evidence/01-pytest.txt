@@ -1,0 +1,24 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.16, pytest-8.3.4, pluggy-1.7.0 -- /usr/local/bin/python3.12
+rootdir: /srv/tests
+plugins: anyio-4.16.0
+collecting ... collected 16 items
+
+test_payment.py::test_tc01_luong_thanh_toan_hop_le PASSED                [  6%]
+test_payment.py::test_tc02_trinh_duyet_sua_so_tien_bi_bo_qua PASSED      [ 12%]
+test_payment.py::test_tc03_sua_so_tien_trong_webhook_bi_tu_choi PASSED   [ 18%]
+test_payment.py::test_tc04_webhook_gia_mao_khong_co_secret PASSED        [ 25%]
+test_payment.py::test_tc05_replay_webhook_da_xu_ly PASSED                [ 31%]
+test_payment.py::test_tc06_webhook_qua_5_phut_bi_tu_choi PASSED          [ 37%]
+test_payment.py::test_tc07_gui_trung_10_lan_dong_thoi PASSED             [ 43%]
+test_payment.py::test_tc08_webhook_hop_le_nhung_sai_don_hoac_sai_tien PASSED [ 50%]
+test_payment.py::test_tc09_khong_xem_duoc_don_cua_phien_khac PASSED      [ 56%]
+test_tls.py::test_tls01_chain_hostname_va_phien_ban PASSED               [ 62%]
+test_tls.py::test_tls02_sai_hostname_bi_tu_choi PASSED                   [ 68%]
+test_tls.py::test_tls03_ca_la_khong_duoc_tin PASSED                      [ 75%]
+test_tls.py::test_tls04_tls_cu_bi_tu_choi PASSED                         [ 81%]
+test_tls.py::test_mtls01_khong_co_chung_thu_client PASSED                [ 87%]
+test_tls.py::test_mtls02_chung_thu_client_da_thu_hoi PASSED              [ 93%]
+test_tls.py::test_mtls03_chung_thu_hop_le_va_acl PASSED                  [100%]
+
+============================== 16 passed in 1.69s ==============================

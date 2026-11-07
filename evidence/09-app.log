@@ -1,0 +1,67 @@
+INFO:     Started server process [7]
+INFO:     Waiting for application startup.
+INFO:     Started server process [7]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Uvicorn running on http://0.0.0.0:9000 (Press CTRL+C to quit)
+INFO:     10.66.10.66:0 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     10.66.10.66:0 - "POST /api/session HTTP/1.1" 201 Created
+INFO:     10.66.10.66:0 - "POST /api/session HTTP/1.1" 201 Created
+INFO:     10.66.10.66:0 - "POST /api/orders HTTP/1.1" 201 Created
+INFO:     10.66.10.20:0 - "POST /api/payments/webhook HTTP/1.1" 200 OK
+INFO:     10.66.10.66:0 - "GET /api/orders/33a8784a-1fc0-4850-8b3a-92738e822b26 HTTP/1.1" 200 OK
+INFO:     10.66.10.66:0 - "POST /api/session HTTP/1.1" 201 Created
+INFO:     10.66.10.66:0 - "POST /api/orders HTTP/1.1" 201 Created
+INFO:     10.66.10.20:0 - "POST /api/payments/webhook HTTP/1.1" 200 OK
+INFO:     10.66.10.66:0 - "GET /api/orders/650c09dc-f7ea-469f-9ddd-1aa523d42324 HTTP/1.1" 200 OK
+INFO:     10.66.10.66:0 - "POST /api/session HTTP/1.1" 201 Created
+INFO:     10.66.10.66:0 - "POST /api/orders HTTP/1.1" 201 Created
+INFO:     10.66.10.66:0 - "POST /api/payments/webhook HTTP/1.1" 401 Unauthorized
+INFO:     10.66.10.66:0 - "GET /api/orders/2664efcf-4fdf-4b32-a958-d8ac481475a4 HTTP/1.1" 200 OK
+INFO:     10.66.10.66:0 - "POST /api/payments/webhook HTTP/1.1" 200 OK
+INFO:     10.66.10.66:0 - "POST /api/session HTTP/1.1" 201 Created
+INFO:     10.66.10.66:0 - "POST /api/orders HTTP/1.1" 201 Created
+INFO:     10.66.10.66:0 - "POST /api/payments/webhook HTTP/1.1" 401 Unauthorized
+INFO:     10.66.10.66:0 - "POST /api/payments/webhook HTTP/1.1" 401 Unauthorized
+INFO:     10.66.10.66:0 - "GET /api/orders/4b32297e-cb35-4a8b-9d43-ddeda30ccfa1 HTTP/1.1" 200 OK
+INFO:     10.66.10.66:0 - "POST /api/session HTTP/1.1" 201 Created
+INFO:     10.66.10.66:0 - "POST /api/orders HTTP/1.1" 201 Created
+INFO:     10.66.10.20:0 - "POST /api/payments/webhook HTTP/1.1" 200 OK
+INFO:     10.66.10.66:0 - "GET /api/orders/bdc53068-cbff-4a99-a9e8-2bb343090167 HTTP/1.1" 200 OK
+INFO:     10.66.10.66:0 - "POST /api/payments/webhook HTTP/1.1" 200 OK
+INFO:     10.66.10.66:0 - "GET /api/orders/bdc53068-cbff-4a99-a9e8-2bb343090167 HTTP/1.1" 200 OK
+INFO:     10.66.10.66:0 - "POST /api/session HTTP/1.1" 201 Created
+INFO:     10.66.10.66:0 - "POST /api/orders HTTP/1.1" 201 Created
+INFO:     10.66.10.66:0 - "POST /api/payments/webhook HTTP/1.1" 401 Unauthorized
+INFO:     10.66.10.66:0 - "GET /api/orders/c104e77f-44a8-40da-bc62-291f52fad15f HTTP/1.1" 200 OK
+INFO:     10.66.10.66:0 - "POST /api/session HTTP/1.1" 201 Created
+INFO:     10.66.10.66:0 - "POST /api/orders HTTP/1.1" 201 Created
+INFO:     10.66.10.66:0 - "POST /api/payments/webhook HTTP/1.1" 200 OK
+INFO:     10.66.10.66:0 - "POST /api/payments/webhook HTTP/1.1" 200 OK
+INFO:     10.66.10.66:0 - "POST /api/payments/webhook HTTP/1.1" 200 OK
+INFO:     10.66.10.66:0 - "POST /api/payments/webhook HTTP/1.1" 200 OK
+INFO:     10.66.10.66:0 - "POST /api/payments/webhook HTTP/1.1" 200 OK
+INFO:     10.66.10.66:0 - "POST /api/payments/webhook HTTP/1.1" 200 OK
+INFO:     10.66.10.66:0 - "POST /api/payments/webhook HTTP/1.1" 200 OK
+INFO:     10.66.10.66:0 - "POST /api/payments/webhook HTTP/1.1" 200 OK
+INFO:     10.66.10.66:0 - "POST /api/payments/webhook HTTP/1.1" 200 OK
+INFO:     10.66.10.66:0 - "POST /api/payments/webhook HTTP/1.1" 200 OK
+INFO:     10.66.10.66:0 - "GET /api/orders/9ad3eb9d-1c19-4cf4-abd7-67280afda566 HTTP/1.1" 200 OK
+INFO:     10.66.10.66:0 - "POST /api/session HTTP/1.1" 201 Created
+INFO:     10.66.10.66:0 - "POST /api/orders HTTP/1.1" 201 Created
+INFO:     10.66.10.66:0 - "POST /api/orders HTTP/1.1" 201 Created
+INFO:     10.66.10.66:0 - "POST /api/payments/webhook HTTP/1.1" 409 Conflict
+INFO:     10.66.10.66:0 - "POST /api/payments/webhook HTTP/1.1" 409 Conflict
+INFO:     10.66.10.66:0 - "GET /api/orders/551ba5d9-2c57-42dc-8e95-feb8d5ebc009 HTTP/1.1" 200 OK
+INFO:     10.66.10.66:0 - "POST /api/session HTTP/1.1" 201 Created
+INFO:     10.66.10.66:0 - "POST /api/orders HTTP/1.1" 201 Created
+INFO:     10.66.10.66:0 - "POST /api/session HTTP/1.1" 201 Created
+INFO:     10.66.10.66:0 - "GET /api/orders/a2a3d79d-eee8-40ba-ac75-bf734864fa8b HTTP/1.1" 404 Not Found
+INFO:     10.66.10.66:0 - "POST /api/session HTTP/1.1" 201 Created
+INFO:     10.66.10.66:0 - "GET /api/orders/a2a3d79d-eee8-40ba-ac75-bf734864fa8b HTTP/1.1" 401 Unauthorized
+INFO:     10.66.10.66:0 - "GET /api/orders/a2a3d79d-eee8-40ba-ac75-bf734864fa8b HTTP/1.1" 401 Unauthorized
+INFO:     10.66.50.10:45704 - "GET /admin/orders HTTP/1.1" 200 OK
+INFO:     10.66.50.10:45716 - "GET /admin/orders HTTP/1.1" 401 Unauthorized
+INFO:     10.66.50.10:45718 - "GET /admin/audit?limit=200 HTTP/1.1" 200 OK

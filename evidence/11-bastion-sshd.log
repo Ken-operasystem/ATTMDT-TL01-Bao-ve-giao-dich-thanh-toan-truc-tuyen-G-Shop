@@ -1,0 +1,41 @@
+Server listening on 0.0.0.0 port 22.
+Server listening on :: port 22.
+Connection from 10.66.60.10 port 60890 on 10.66.50.10 port 22 rdomain ""
+kex_exchange_identification: Connection closed by remote host [preauth]
+Connection closed by 10.66.60.10 port 60890 [preauth]
+srclimit_penalise: ipv4: new 10.66.60.10/32 deferred penalty of 1.000 seconds for penalty: connections without attempting authentication
+Connection from 10.66.60.10 port 48816 on 10.66.50.10 port 22 rdomain ""
+Connection closed by authenticating user ops 10.66.60.10 port 48816 [preauth]
+srclimit_penalise: ipv4: new 10.66.60.10/32 deferred penalty of 1.000 seconds for penalty: connections without attempting authentication
+Connection from 10.66.60.10 port 48822 on 10.66.50.10 port 22 rdomain ""
+User root from 10.66.60.10 not allowed because not listed in AllowUsers
+Connection closed by invalid user root 10.66.60.10 port 48822 [preauth]
+Connection from 10.66.60.10 port 48838 on 10.66.50.10 port 22 rdomain ""
+Accepted key ED25519 SHA256:5p2WDU7YWNXxPeWxMj/bQA28PV+mPx1vZy0kPDjO8DI found at /etc/ssh/authorized_keys/ops:1
+Postponed publickey for ops from 10.66.60.10 port 48838 ssh2 [preauth]
+Accepted key ED25519 SHA256:5p2WDU7YWNXxPeWxMj/bQA28PV+mPx1vZy0kPDjO8DI found at /etc/ssh/authorized_keys/ops:1
+Accepted publickey for ops from 10.66.60.10 port 48838 ssh2: ED25519 SHA256:5p2WDU7YWNXxPeWxMj/bQA28PV+mPx1vZy0kPDjO8DI
+User child is on pid 20
+Starting session: command for ops from 10.66.60.10 port 48838 id 0
+Close session: user ops from 10.66.60.10 port 48838 id 0
+Received disconnect from 10.66.60.10 port 48838:11: disconnected by user
+Disconnected from user ops 10.66.60.10 port 48838
+Connection from 10.66.60.10 port 48846 on 10.66.50.10 port 22 rdomain ""
+Accepted key ED25519 SHA256:5p2WDU7YWNXxPeWxMj/bQA28PV+mPx1vZy0kPDjO8DI found at /etc/ssh/authorized_keys/ops:1
+Postponed publickey for ops from 10.66.60.10 port 48846 ssh2 [preauth]
+Accepted key ED25519 SHA256:5p2WDU7YWNXxPeWxMj/bQA28PV+mPx1vZy0kPDjO8DI found at /etc/ssh/authorized_keys/ops:1
+Accepted publickey for ops from 10.66.60.10 port 48846 ssh2: ED25519 SHA256:5p2WDU7YWNXxPeWxMj/bQA28PV+mPx1vZy0kPDjO8DI
+User child is on pid 25
+Starting session: command for ops from 10.66.60.10 port 48846 id 0
+Close session: user ops from 10.66.60.10 port 48846 id 0
+Received disconnect from 10.66.60.10 port 48846:11: disconnected by user
+Disconnected from user ops 10.66.60.10 port 48846
+Connection from 10.66.60.10 port 48860 on 10.66.50.10 port 22 rdomain ""
+Accepted key ED25519 SHA256:5p2WDU7YWNXxPeWxMj/bQA28PV+mPx1vZy0kPDjO8DI found at /etc/ssh/authorized_keys/ops:1
+Postponed publickey for ops from 10.66.60.10 port 48860 ssh2 [preauth]
+Accepted key ED25519 SHA256:5p2WDU7YWNXxPeWxMj/bQA28PV+mPx1vZy0kPDjO8DI found at /etc/ssh/authorized_keys/ops:1
+Accepted publickey for ops from 10.66.60.10 port 48860 ssh2: ED25519 SHA256:5p2WDU7YWNXxPeWxMj/bQA28PV+mPx1vZy0kPDjO8DI
+User child is on pid 29
+Starting session: command for ops from 10.66.60.10 port 48860 id 0
+Received disconnect from 10.66.60.10 port 48860:11: disconnected by user
+Disconnected from user ops 10.66.60.10 port 48860

@@ -1,0 +1,24 @@
+KQ   NGUON    DICH            PORT  MONGDOI THUCTE RULE  MO TA
+PASS tester   10.66.10.2      443   ALLOW  ALLOW  R1    Internet -> IP cong khai HTTPS (DNAT toi Web)
+PASS tester   10.66.10.2      22    BLOCK  BLOCK  R8    Internet -> SSH tren firewall
+PASS tester   10.66.10.2      5432  BLOCK  BLOCK  R8    Internet -> PostgreSQL qua IP cong khai
+PASS tester   10.66.40.10     5432  BLOCK  BLOCK  R8    Internet -> DB truc tiep
+PASS tester   10.66.50.10     22    BLOCK  BLOCK  R8    Internet -> Bastion SSH truc tiep
+PASS tester   10.66.30.10     8000  BLOCK  BLOCK  R8    Internet -> App truc tiep, bo qua Web
+PASS tester   10.66.30.10     9000  BLOCK  BLOCK  R8    Internet -> API quan tri
+PASS web      10.66.30.10     8000  ALLOW  ALLOW  R2    Web -> App API
+PASS web      10.66.40.10     5432  BLOCK  BLOCK  R8    Web -> DB
+PASS web      10.66.30.10     9000  BLOCK  BLOCK  R8    Web -> API quan tri
+PASS web      10.66.50.10     22    BLOCK  BLOCK  R8    Web -> Bastion
+PASS app      10.66.40.10     5432  ALLOW  ALLOW  R3    App -> DB
+PASS app      10.66.10.20     8443  ALLOW  ALLOW  R4a   App -> cong thanh toan
+PASS app      10.66.10.30     9443  ALLOW  ALLOW  R4b   App -> API ngan hang (mTLS)
+PASS app      10.66.50.10     22    BLOCK  BLOCK  R8    App -> Bastion
+PASS db       10.66.10.30     9443  BLOCK  BLOCK  R8    DB -> Internet (chong lay du lieu ra)
+PASS db       10.66.30.10     8000  BLOCK  BLOCK  R8    DB -> App
+PASS admin    10.66.50.10     22    ALLOW  ALLOW  R5    VPN -> Bastion SSH
+PASS admin    10.66.30.10     9000  BLOCK  BLOCK  R8    VPN -> API quan tri, khong qua Bastion
+PASS admin    10.66.40.10     5432  BLOCK  BLOCK  R8    VPN -> DB truc tiep
+PASS bastion  10.66.30.10     9000  ALLOW  ALLOW  R6b   Bastion -> API quan tri
+PASS bastion  10.66.40.10     5432  BLOCK  BLOCK  R8    Bastion -> DB 5432 (chi mo SSH)
+Tong: 22 PASS, 0 FAIL
